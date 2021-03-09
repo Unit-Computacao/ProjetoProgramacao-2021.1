@@ -18,6 +18,49 @@ public class Endereco {
     private String uf;
     private String endereco;
     private String bairro;
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+    
+    
+    // Lixo
     public void cadastrarEndereco(){ 
         this.endereco = JOptionPane.showInputDialog("Entre com o endereço");
         this.numero = JOptionPane.showInputDialog("Entre com o numero");

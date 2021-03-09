@@ -30,7 +30,7 @@ public class PedidoTeste {
         arroz.inserirNovoProduto(1, "Arroz", 4.22);
         p.inserirProdutoPedido(arroz, 2);
         float total = arroz.getValorProduto() * 2;
-        assertEquals(total, p.totalProduto(1));
+        assertEquals(total, p.totalProduto(1), 2);
     }
     @Test
     public void valorPedidoTest() {
@@ -38,7 +38,7 @@ public class PedidoTeste {
         arroz.inserirNovoProduto(1, "Arroz", 4.22);
         p.inserirProdutoPedido(arroz, 2);
         float total = arroz.getValorProduto() * 2;
-        assertEquals(total, p.totalPedido());
+        assertEquals(total, p.totalPedido(), 2);
     }
     
     
