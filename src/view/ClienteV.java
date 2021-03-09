@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
@@ -13,7 +15,9 @@ import model.Cliente;
  * @author fabio
  */
 public class ClienteV extends javax.swing.JFrame {
-
+    // variáveis criadas por mim
+    private List<Cliente> clientes = new ArrayList<Cliente>();
+    //
     /**
      * Creates new form ClienteV
      */
@@ -42,6 +46,8 @@ public class ClienteV extends javax.swing.JFrame {
         txtMesNacimento = new javax.swing.JTextField();
         btCadastrar = new javax.swing.JButton();
         btCancelar = new javax.swing.JButton();
+        btListar = new javax.swing.JButton();
+        btSalvar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,32 +108,45 @@ public class ClienteV extends javax.swing.JFrame {
             }
         });
 
+        btListar.setText("Listar");
+        btListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btListarActionPerformed(evt);
+            }
+        });
+
+        btSalvar.setText("Salvar");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtMesNacimento, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtMesNacimento))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(58, 58, 58)
+                                .addComponent(txtNome))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(58, 58, 58)
-                        .addComponent(txtNome)))
+                        .addComponent(btCadastrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btListar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btCancelar)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(btCadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btCancelar)
-                .addGap(56, 56, 56))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +164,9 @@ public class ClienteV extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btCadastrar)
-                    .addComponent(btCancelar))
+                    .addComponent(btCancelar)
+                    .addComponent(btListar)
+                    .addComponent(btSalvar))
                 .addGap(21, 21, 21))
         );
 
@@ -172,6 +193,7 @@ public class ClienteV extends javax.swing.JFrame {
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         // TODO add your handling code here:
+       
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
@@ -183,10 +205,23 @@ public class ClienteV extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "O usuário " +
                 c.getNome() + " foi cadastrado com sucesso!!!"
         );
+        clientes.add(c);
         txtCodCliente.setText("");
         txtMesNacimento.setText("");
         txtNome.setText("");
+        
+        //txtCodCliente.setEnabled(false);
     }//GEN-LAST:event_btCadastrarActionPerformed
+
+    private void btListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btListarActionPerformed
+        // TODO add your handling code here:
+        for(Cliente c: clientes){
+            JOptionPane.showMessageDialog(rootPane, "ID Cliente: " +
+                c.getCodCliente() + 
+                    "\nNome Cliente: " + c.getNome() +
+                    "\nMês de Nascimento: " + c.getMesNascimento());
+        }
+    }//GEN-LAST:event_btListarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,6 +261,8 @@ public class ClienteV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btListar;
+    private javax.swing.JButton btSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
