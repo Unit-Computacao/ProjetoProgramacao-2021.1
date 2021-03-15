@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,26 +20,41 @@ import javax.swing.JOptionPane;
  * @author fabio
  */
 public class BancoDeDados {
-    public static void salvarArquivo(String caminho, String texto){
+
+    public static void salvarArquivo(String caminho, String texto) {
         //Travar o caminho para o arquivo e o nomeFileWriter
         Path arquivo = Paths.get(caminho);
-        if(!Files.exists(arquivo)){
         BufferedWriter bw = null;
-        try {
-            Files.createFile(arquivo);
-            bw = new BufferedWriter(new FileWriter(arquivo.toFile(), true));
-            bw.write(texto);
-        } catch (IOException ex) {
-           System.out.println("Arquivo com problema");
-        } finally{
+        if (!Files.exists(arquivo)) {
             try {
-                bw.close();
+                Files.createFile(arquivo);
+                bw = new BufferedWriter(new FileWriter(arquivo.toFile(), true));
+                bw.write(texto);
             } catch (IOException ex) {
-                System.out.println("Não consegui fechar o arquivo");
+                System.out.println("Arquivo com problema");
+            } finally {
+                try {
+                    bw.close();
+                } catch (IOException ex) {
+                    System.out.println("Não consegui fechar o arquivo");
+                }
             }
-        } } else {
-            JOptionPane.showMessageDialog(null, "Não foi possível salvar, usuário já existe");
+        } else {
+            try {
+                bw = new BufferedWriter(new FileWriter(arquivo.toFile(), true));
+                bw.newLine();
+                bw.write(texto);
+            } catch (IOException ex) {
+                System.out.println("Arquivo com problemas");
+            } finally {
+                try {
+                    bw.close();
+                } catch (IOException ex) {
+                    System.out.println("Não consegui fechar o arquivo");
+                }
+
+            }
         }
+
     }
-    
 }
