@@ -16,6 +16,27 @@ public class Funcionario extends Pessoa{
     private double salario;
     private String cargo;
     private String setor;
+    private FolhaPagamento fp;
+
+    public Funcionario() {
+        fp = new FolhaPagamento();
+    }
+    public String CalcularFolhaPagamento(){
+        String folhaPg;
+        fp.setSalarioBruto(this.salario);
+        folhaPg = "Folha de pagamento" +
+                "\nNome: " + super.getNome() +
+                "\n----------------------------" +
+                "\nSalário Bruto: R$ " + this.salario +
+                "\n----------------------------" +
+                "\nDescontos" +
+                "\n----------------------------" +
+                "\nINSS: R$ " + fp.getInss() +
+                "\nIRRF: R$ " + fp.getIrrf() +
+                "\n------------------------------" +
+                "\nSalário Líquido: R$ " + fp.getSalarioLiquido();
+        return folhaPg;
+    }
 
     public int getMatricula() {
         return matricula;

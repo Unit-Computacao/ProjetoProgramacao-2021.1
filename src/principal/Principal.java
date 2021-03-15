@@ -9,6 +9,7 @@ import model.Pessoa;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.FolhaPagamento;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Principal {
         Cliente joselito = new Cliente();
         joselito.cadastrarCliente();
         joselito.exibir();
-        */
+        
         List<Integer> teste = new ArrayList<Integer>();
         for(int i=0; i<50; i=i+2){
             teste.add(i);
@@ -51,7 +52,12 @@ public class Principal {
             p.exibir();
         }
         System.out.println(pessoas.size());
-
+        */
+        FolhaPagamento fp = new FolhaPagamento();
+        fp.setSalarioBruto(5630.00);
+        System.out.println(fp.getInss());
+        System.out.println(fp.getIrrf());
+        System.out.println(fp.getSalarioLiquido());
     }
     
 }
