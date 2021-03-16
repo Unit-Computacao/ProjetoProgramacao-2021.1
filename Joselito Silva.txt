@@ -1,0 +1,1 @@
+{"matricula":0,"salario":4562.33,"fp":{"salarioBruto":0.0,"inss":0.0,"irrf":0.0,"salarioLiquido":0.0},"nome":"Joselito Silva","end":{"numero":"2","endereco":"Rua X"}}

@@ -5,6 +5,7 @@
  */
 package view;
 
+import com.google.gson.Gson;
 import javax.swing.JOptionPane;
 import model.Endereco;
 import model.Funcionario;
@@ -57,6 +58,7 @@ public class FuncionarioV extends javax.swing.JFrame {
         lblNumero = new javax.swing.JLabel();
         txtEnd = new javax.swing.JTextField();
         txtNumero = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão de Funcionários");
@@ -119,6 +121,13 @@ public class FuncionarioV extends javax.swing.JFrame {
 
         lblNumero.setText("Numero:");
 
+        jButton3.setText("Salvar Funcionario");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -131,6 +140,8 @@ public class FuncionarioV extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton1)
+                                .addGap(81, 81, 81)
+                                .addComponent(jButton3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -210,7 +221,8 @@ public class FuncionarioV extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -253,6 +265,20 @@ public class FuncionarioV extends javax.swing.JFrame {
         //txtAFolha
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Funcionario f = new Funcionario();
+        Endereco e = new Endereco();
+        e.setEndereco(txtEnd.getText());
+        e.setNumero(txtNumero.getText());
+        f.setEnd(e);
+        f.setNome(txtNome.getText());
+        f.setSalario(Double.parseDouble(txtSalario.getText()));
+        Gson json = new Gson();
+        String dados = json.toJson(f);
+        BancoDeDados.salvarArquivo("./FunJson.json", dados);        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,6 +317,7 @@ public class FuncionarioV extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
