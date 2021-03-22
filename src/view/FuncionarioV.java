@@ -10,12 +10,17 @@ import javax.swing.JOptionPane;
 import model.Endereco;
 import model.Funcionario;
 import utils.BancoDeDados;
+import utils.BancoDeDadosJson;
+import utils.BancoDeDadosTXT;
+import utils.IBancoDeDados;
 
 /**
  *
  * @author fabio
  */
 public class FuncionarioV extends javax.swing.JFrame {
+    // Minhas de clarações
+    private IBancoDeDados db = null;
 
     /**
      * Creates new form FuncionarioV
@@ -59,6 +64,7 @@ public class FuncionarioV extends javax.swing.JFrame {
         txtEnd = new javax.swing.JTextField();
         txtNumero = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestão de Funcionários");
@@ -121,10 +127,17 @@ public class FuncionarioV extends javax.swing.JFrame {
 
         lblNumero.setText("Numero:");
 
-        jButton3.setText("Salvar Funcionario");
+        jButton3.setText("Salvar Funcionario como TXT");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Salvar Funcionario como JSON");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
             }
         });
 
@@ -140,8 +153,10 @@ public class FuncionarioV extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton1)
-                                .addGap(81, 81, 81)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -179,7 +194,7 @@ public class FuncionarioV extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(lblNumero))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtEnd, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,7 +237,8 @@ public class FuncionarioV extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -267,6 +283,7 @@ public class FuncionarioV extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        db = new BancoDeDadosTXT();
         Funcionario f = new Funcionario();
         Endereco e = new Endereco();
         e.setEndereco(txtEnd.getText());
@@ -276,8 +293,26 @@ public class FuncionarioV extends javax.swing.JFrame {
         f.setSalario(Double.parseDouble(txtSalario.getText()));
         Gson json = new Gson();
         String dados = json.toJson(f);
-        BancoDeDados.salvarArquivo("./FunJson.json", dados);        
+        //BancoDeDados.salvarArquivo("./FunJson.json", dados);
+        db.salvarArquivo("./FunJson.json", dados);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        db = new BancoDeDadosJson();
+        Funcionario f = new Funcionario();
+        Endereco e = new Endereco();
+        e.setEndereco(txtEnd.getText());
+        e.setNumero(txtNumero.getText());
+        f.setEnd(e);
+        f.setNome(txtNome.getText());
+        f.setSalario(Double.parseDouble(txtSalario.getText()));
+        Gson json = new Gson();
+        String dados = json.toJson(f);
+        BancoDeDados.salvarArquivo("./FunJson.json", dados);
+        db.salvarArquivo("./FunJson.json", dados);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,6 +353,7 @@ public class FuncionarioV extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

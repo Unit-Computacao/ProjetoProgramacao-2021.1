@@ -16,11 +16,10 @@ import java.nio.file.Paths;
  *
  * @author fabio
  */
-public class BancoDeDadosJson implements IBancoDeDados{
-    
+public class BancoDeDadosTXT implements IBancoDeDados {
+
     @Override
     public void salvarArquivo(String caminho, String texto) {
-        //Travar o caminho para o arquivo e o nomeFileWriter
         Path arquivo = Paths.get(caminho);
         BufferedWriter bw = null;
         if (!Files.exists(arquivo)) {
@@ -53,6 +52,6 @@ public class BancoDeDadosJson implements IBancoDeDados{
 
             }
         }
-
     }
+
 }
