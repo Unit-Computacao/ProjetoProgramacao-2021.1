@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author fabio
- */
+ */import com.google.gson.Gson;
+
 public class Produto {
     private int codigo;
     private String nome;
@@ -20,6 +21,16 @@ public class Produto {
     private String unidade;
     private String marca;
     private String categoria;
+    private double valorVenda;
+
+    public double getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
+    
     public int inserirNovoProduto(){
         return 0;
     }
