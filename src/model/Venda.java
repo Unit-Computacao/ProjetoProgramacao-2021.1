@@ -15,13 +15,13 @@ import java.util.List;
  */
 public class Venda {
     private int codVenda;
-    private List<Produto> produtos;
-    private List<Integer> quantidade;
+    private List<Produto> produtos = null;
+    private List<Integer> quantidade = null;
     private double valorTotal;
 
     public Venda() {
-        produtos = new ArrayList<Produto>();
-        quantidade = new ArrayList<Integer>();        
+        produtos = new ArrayList();
+        quantidade = new ArrayList ();        
     }
     
     public void inserir(Produto p, int quantidade){
